@@ -49,4 +49,13 @@ public class Nodo {
 
         }
     }
+    private void  ImprimePreOrden(Nodo recorre)
+      {
+          if (recorre != null)
+          {
+              System.out.print(recorre.dato + " ");
+              ImprimePreOrden (recorre.izq);
+              ImprimePreOrden (recorre.dere);
+          }
+      }
 }
