@@ -58,4 +58,10 @@ public class Nodo {
               ImprimePreOrden (recorre.dere);
           }
       }
+    
+    public void ImprimePreOrden ()
+      {
+          ImprimePreOrden (raiz);
+          System.out.println();
+      }
 }
