@@ -18,7 +18,7 @@ public class Nodo {
         raiz=null;
     }
     
-    public void insertar(int dato){
+    public void insertar(int dato){   // Inserta o el nuevo dato en un nodo diferente segun lo que sea indicado 
         Nodo nuevo;
         nuevo = new Nodo();
         nuevo.dato = dato;
@@ -65,19 +65,19 @@ public class Nodo {
           System.out.println();
       }
     
-       private void imprimirEntre (Nodo recorre)
+       private void imprimeEnOrden (Nodo recorre)
       {
           if (recorre != null)
           {    
-              imprimirEntre (recorre.izq);
+              imprimeEnOrden (recorre.izq);
               System.out.print(recorre.dato + " ");
-              imprimirEntre (recorre.dere);
+              imprimeEnOrden (recorre.dere);
           }
       }
 
-      public void imprimirEntre ()
+      public void imprimeEnOrden ()
       {
-          imprimirEntre (raiz);
+          imprimeEnOrden (raiz);
           System.out.println();
       }
 
