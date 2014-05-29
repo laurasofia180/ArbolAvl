@@ -64,4 +64,38 @@ public class Nodo {
           ImprimePreOrden (raiz);
           System.out.println();
       }
+    
+       private void imprimirEntre (Nodo recorre)
+      {
+          if (recorre != null)
+          {    
+              imprimirEntre (recorre.izq);
+              System.out.print(recorre.dato + " ");
+              imprimirEntre (recorre.dere);
+          }
+      }
+
+      public void imprimirEntre ()
+      {
+          imprimirEntre (raiz);
+          System.out.println();
+      }
+
+
+      private void imprimePostOrden (Nodo recorre)
+      {
+          if (recorre != null)
+          {
+              imprimePostOrden (recorre.izq);
+              imprimePostOrden (recorre.dere);
+              System.out.print(recorre.dato + " ");
+          }
+      }
+
+
+      public void imprimePostOrden ()
+      {
+          imprimePostOrden (raiz);
+          System.out.println();
+      }
 }
