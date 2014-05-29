@@ -11,13 +11,5 @@ package arbolavl;
  * @author sofia
  */
 public class ArbolAvl {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-       // ArbolAvl Avl = new ArbolAvl ();
-        //Avl.insertar();
-        // TODO code application logic here
-    }
+    
 }
