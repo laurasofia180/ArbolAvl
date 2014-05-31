@@ -83,29 +83,28 @@ class Nodo implements Comparable{
         }
     }
 
-    public void setDere(Nodo dere) {
-        if (!((dere == null) || (dato.compareTo(dere.getDato()) == -1))) {
-            throw new RuntimeException("No se puede poner el " + dere.dato + " en la derecha " + dato);
+    public void setDere(Nodo nodo) {
+        if (nodo == null || nodo.getDato() == -1) {
+            
+            throw new RuntimeException("No se puede poner el nodo en la derecha de " + this);
         }
 
-        this.dere = dere;
+        this.dere = nodo;
 
-        if (this.dere != null) {
-            this.dere.setRaiz(this);
-        }
+        nodo.setRaiz(this);
     }
     
-    public void setIzq(Nodo izq) {
-        if (!((izq == null) || (dato.compareTo(izq.getDato()) == 1))) {
-            throw new RuntimeException("No se puede poner el " + izq.dato + " en la izquierda " + dato);
+    public void setIzq(Nodo nodo) {
+        if (nodo == null || nodo.getDato() == -1) {
+            
+            throw new RuntimeException("No se puede poner el nodo en la izquierda de " + this);
         }
 
-        this.izq = izq;
+        this.izq = nodo;
 
-        if (this.izq != null) {
-            this.izq.setRaiz(this);
-        }
+        nodo.setRaiz(this);
     }
+ 
     
     // Este metodo se encarga de llamar al método recursivo pasando la dirección del nodo raiz.Visitar la raiz.
     //- Recorrer el subárbol izquierdo en pre-orden.
