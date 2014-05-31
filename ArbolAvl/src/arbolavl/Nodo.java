@@ -95,7 +95,7 @@ class Nodo implements Comparable{
     }
     
     public void setIzq(Nodo nodo) {
-        if (nodo == null || nodo.getDato() == -1) {
+        if (nodo == null || nodo.getDato() == 1) {
             
             throw new RuntimeException("No se puede poner el nodo en la izquierda de " + this);
         }
@@ -105,6 +105,26 @@ class Nodo implements Comparable{
         nodo.setRaiz(this);
     }
  
+    public Nodo PequeñoNodo(Nodo anteriorPequeño){
+        return PequeñoNodo(anteriorPequeño);
+    }
+    
+    public class PequeñoNodo {
+        private Nodo anteriorPequeño;
+        
+        public PequeñoNodo(Nodo anteriorPequeño){
+            if ((anteriorPequeño == izq || anteriorPequeño == dere)){
+                this.anteriorPequeño = anteriorPequeño;
+            }
+        }
+         public void con (Nodo newPequeño){
+             if(anteriorPequeño == izq){
+                 setIzq(newPequeño);
+             } else if (anteriorPequeño == dere){
+                 setDere(newPequeño);
+             }
+         }       
+    }
     
     // Este metodo se encarga de llamar al método recursivo pasando la dirección del nodo raiz.Visitar la raiz.
     //- Recorrer el subárbol izquierdo en pre-orden.
