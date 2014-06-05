@@ -11,7 +11,7 @@ package arbolavl;
  */
 class Nodo implements Comparable{
 
-    int dato;
+    Integer dato;
     Nodo dere, izq, raiz;
 
     public Nodo(int dato, Nodo dere, Nodo izq, Nodo raiz) {
