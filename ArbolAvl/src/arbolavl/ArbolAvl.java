@@ -15,16 +15,21 @@ public class ArbolAvl {
 
     private Nodo raiz;
     private Integer tamaño;
-    private Nodo nodo;
+    public Nodo nodo;
 
+    // Costructor
     public ArbolAvl() {
+//        nodo = new Nodo(dato);
+//        this.nodo = Nodo;
         tamaño = 0;
     }
 
+    //Isertar Dato
     public boolean add(Integer dato) {
         if (esVacio()) {
             raiz = new Nodo(dato, null, null, null);
             tamaño++;
+            System.out.println("Hola");
             return true;
         } else {
             boolean agregar = add(dato);
@@ -33,7 +38,7 @@ public class ArbolAvl {
         }
     }
 
-    private boolean add(Integer dato, Nodo actual) {
+    public boolean add(Integer dato, Nodo actual) {
         if (actual.getDato() == dato) {
             JOptionPane.showMessageDialog(null, "Numero Repetido", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (actual.getDato() < dato) {
@@ -47,7 +52,27 @@ public class ArbolAvl {
         }
         return false;
     }
-
+    
+        // busca el dato dentro del arbol
+   public boolean buscar(Nodo raiz, Nodo nodo){
+       if (raiz == null){
+           JOptionPane.showMessageDialog(null,"No se encuentra");
+       } else {
+           if (nodo.getDato() == raiz.getDato()){
+               int dat = raiz.getDato();
+               JOptionPane.showMessageDialog(null,"valor" + dat + " se encontro en el dato");
+           } else {
+               if (nodo.getDato() < raiz.getDato()){ // lado izquierdo
+                   return buscar (raiz.izq(), nodo);
+               } else {
+                   return buscar (raiz.dere(),nodo);
+               }
+           }
+       }
+       return false;
+   }
+    
+// este metodo balancea el nodo segun el peso que tenga.
     private void balanceo(Nodo nodo) {
         if (nodo == null) {
             return;
@@ -67,7 +92,7 @@ public class ArbolAvl {
 
     }
 
-     private void rotarIzq(Nodo ViejoNodo) {
+    private void rotarIzq(Nodo ViejoNodo) {
         Nodo newNodo, padre = ViejoNodo.padre();
         if (ViejoNodo.dere().dere() != null) {
             newNodo = soltarHijosDerechos(ViejoNodo);
@@ -83,7 +108,7 @@ public class ArbolAvl {
 
         setNewHijoNodo(padre, ViejoNodo, newNodo);
     }
-       
+
     private void rotarDere(Nodo ViejoNodo) {
         Nodo newNodo, padre = ViejoNodo.padre();
         if (ViejoNodo.dere().dere() != null) {
@@ -104,12 +129,12 @@ public class ArbolAvl {
     public Integer tamaño() {
         return tamaño;
     }
-    
-    public Nodo raiz(){
+
+    public Nodo raiz() {
         return nodo.raiz();
     }
-    
-    public void imprimeEnOrden(){
+
+    public void imprimeEnOrden() {
         nodo.imprimeEnOrden();
     }
 
@@ -141,12 +166,13 @@ public class ArbolAvl {
         return hijoIzquierdo;
     }
     
+    // Metodo eliminar
     public boolean remover(Integer dato) {
         final boolean removidos = contiene(dato);
-        balanceo(raiz);
+        balanceo(raiz); 
         return removidos;
     }
-    
+
     public void clear() {
         nodo.setDato(null);
         nodo.setDere(null);
@@ -154,7 +180,7 @@ public class ArbolAvl {
         nodo.setPadre(null);
         nodo.setRaiz(null);
     }
-    
+
     public boolean contiene(Integer data) {
         if (esVacio()) {
             return true;
