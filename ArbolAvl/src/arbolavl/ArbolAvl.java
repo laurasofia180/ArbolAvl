@@ -17,47 +17,39 @@ public class ArbolAvl {
     public ArbolAvl(){
         tamaño = 0;
     }
-     public int tamaño(){
-         return tamaño;
-     }
      
-     public boolean add(int dato, Nodo nod){
+     public boolean add(int dato){
          if (esVacio()){
              raiz = new Nodo (dato,null,null,null);
              tamaño++;
              return true;
          } else {
-             boolean agregar = add(dato,raiz);
+             boolean agregar = add(dato);
              balanceo (raiz);
              return agregar;
          }
      }
      
      private boolean add(int dato, Nodo actual){
-         switch (actual.dato().equals(dato)){
-             case 1:
-                 Nodo izq = actual.izq();
+         if (actual.getDato() == dato) {
+             Nodo izq = actual.izq();
                  if(izq != null){
                      return add (dato,izq);
                  } else {
-                     actual.setIzq(new Nodo (dato,null,null,null));
+                     actual.setIzq(new Nodo (dato,null,actual,null));
                      tamaño++;
                      return true;
                  }
+         }else {
+            Nodo dere = actual.dere();
+            if (dere != null){
+                return add (dato, dere); 
+            } else {
+                actual.setDere(new Nodo (dato,actual,null,null));
+                tamaño++;
+                return true;
+            }
          }
-         
-         case -1:
-         Nodo dere = actual.dere();
-         if (dere != null){
-         return add (dato, dere);
-         
-        } else {
-         actual.setDere(new Nodo (dato));
-         tamaño++;
-         return true;
-        }
-         default:
-         return false;
      }
 
     private void balanceo (Nodo nodo) {
@@ -80,6 +72,23 @@ public class ArbolAvl {
        }
   
     }
- 
+ private void rotarIzq(Nodo anteriorNodo) {
+   
+    }
+
+    private void rotateRight(Nodo oldNodo) {
+        
+    }
+
+    public int tamaño(){
+         return tamaño;
+     }
+     
+     public boolean esVacio(){
+         if (tamaño == 0) {
+             return true;
+         }
+         return false;
+     }
    
 }
