@@ -91,7 +91,8 @@ public class ArbolAvl {
         }
 
     }
-
+    // Metodo de rotar a la izquierda
+    
     private void rotarIzq(Nodo ViejoNodo) {
         Nodo newNodo, padre = ViejoNodo.padre();
         if (ViejoNodo.dere().dere() != null) {
@@ -109,6 +110,8 @@ public class ArbolAvl {
         setNewHijoNodo(padre, ViejoNodo, newNodo);
     }
 
+    // Metodo Rotar a la derecha 
+    
     private void rotarDere(Nodo ViejoNodo) {
         Nodo newNodo, padre = ViejoNodo.padre();
         if (ViejoNodo.dere().dere() != null) {
@@ -144,7 +147,8 @@ public class ArbolAvl {
         }
         return false;
     }
-
+    
+    
     private void setNewHijoNodo(Nodo raiz, Nodo antHijo, Nodo newHijo) {
         if (raiz == null) {
             newHijo.setRaiz(null);

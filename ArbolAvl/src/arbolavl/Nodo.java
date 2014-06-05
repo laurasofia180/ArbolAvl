@@ -25,6 +25,8 @@ class Nodo {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    // Costructores de cada uno 
+    
     public Integer dato(){
         return dato;
     }
@@ -65,10 +67,12 @@ class Nodo {
         }
     }
 
+    // verifica el peso de cada lado del arbol
     public int peso() {
         return 1 + Math.max(izqPeso(), derePeso());
     }
 
+    //  Da la profundidad del arbol 
     public int profundidad() {
         if (raiz == null) {
             return 0;
@@ -76,7 +80,9 @@ class Nodo {
             return 1 + raiz.profundidad();
         }
     }
-
+    
+    // Metodo de balanceo de los nodos 
+    
     public boolean balanceo() {
         if (esHoja()) {
             return true;
@@ -115,7 +121,7 @@ class Nodo {
             this.dere.setPadre(this);
         }
     }
-
+ // verifica la posiscion de cada nodo segun el balanceo 
     public void setDere(Nodo nodo) {
         if (nodo == null || nodo.getDato() == -1) {
             throw new RuntimeException("No se puede poner el nodo en la derecha de " + this);
