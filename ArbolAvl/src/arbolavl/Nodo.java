@@ -9,18 +9,38 @@ package arbolavl;
  *
  * @author sofia
  */
-class Nodo implements Comparable{
+class Nodo {
 
     Integer dato;
-    Nodo dere, izq, raiz;
+    Nodo dere, izq, raiz, padre;
 
-    public Nodo(int dato, Nodo dere, Nodo izq, Nodo raiz) {
+    public Nodo(Integer dato, Nodo dere, Nodo izq, Nodo raiz) {
         this.dato = dato;
         this.dere = dere;
         this.izq = izq;
         this.raiz = raiz;
     }
+    
+    public Integer dato(){
+        return dato;
+    }
+    
+    public Nodo raiz(){
+        return raiz;
+    }
 
+    public Nodo izq(){
+        return izq;
+    }
+    
+    public Nodo dere(){
+        return dere;
+    }
+
+    public Nodo padre(){
+        return padre;
+    }
+    
     public boolean esHoja() {
         return ((izq == null) && (dere == null));
     }
@@ -57,15 +77,14 @@ class Nodo implements Comparable{
         if (esHoja()) {
             return true;
         } else {
-            boolean izqbalanceo = (izq == null || izq.balanceo());
-            boolean derebalanceo = (dere == null || dere.balanceo());
-            boolean currentbalanceo = (Math.abs(derePeso() - izqPeso()) <= 1);
-
-            return currentbalanceo && izqbalanceo && derebalanceo;
+            boolean izqBalanceo = (izq == null || izq.balanceo());
+            boolean dereBalanceo = (dere == null || dere.balanceo());
+            boolean actualBalanceo = (Math.abs(derePeso() - izqPeso()) <= 1);
+            return actualBalanceo && izqBalanceo && dereBalanceo;
         }
     }
     
-    public void setDato(int dato) {
+    public void setDato(Integer dato) {
         this.dato = dato;
     }
 
@@ -82,48 +101,53 @@ class Nodo implements Comparable{
             this.dere.setRaiz(this);
         }
     }
+    
+    public void setPadre(Nodo padre){
+        this.padre = padre;
+        if (this.izq != null && this.izq.padre != this) {
+            this.izq.setPadre(this);
+        }
+        if (this.dere != null && this.dere.padre != this){
+            this.dere.setPadre(this);
+        }
+    }
 
     public void setDere(Nodo nodo) {
         if (nodo == null || nodo.getDato() == -1) {
-            
             throw new RuntimeException("No se puede poner el nodo en la derecha de " + this);
         }
-
         this.dere = nodo;
-
         nodo.setRaiz(this);
     }
     
     public void setIzq(Nodo nodo) {
         if (nodo == null || nodo.getDato() == 1) {
-            
             throw new RuntimeException("No se puede poner el nodo en la izquierda de " + this);
         }
-
         this.izq = nodo;
-
         nodo.setRaiz(this);
     }
  
-    public Nodo PequeñoNodo(Nodo anteriorPequeño){
-        return PequeñoNodo(anteriorPequeño);
+    public reemplazoPequeñoNodo reemplazar(Nodo anteriorPequeño){
+        return new reemplazoPequeñoNodo(anteriorPequeño);
     }
     
-    public class PequeñoNodo {
+    public class reemplazoPequeñoNodo {
         private Nodo anteriorPequeño;
         
-        public PequeñoNodo(Nodo anteriorPequeño){
+        public reemplazoPequeñoNodo(Nodo anteriorPequeño){
             if ((anteriorPequeño == izq || anteriorPequeño == dere)){
                 this.anteriorPequeño = anteriorPequeño;
             }
         }
+        
          public void con (Nodo newPequeño){
              if(anteriorPequeño == izq){
                  setIzq(newPequeño);
              } else if (anteriorPequeño == dere){
                  setDere(newPequeño);
              }
-         }       
+         }
     }
     
     // Este metodo se encarga de llamar al método recursivo pasando la dirección del nodo raiz.Visitar la raiz.
@@ -166,10 +190,5 @@ class Nodo implements Comparable{
     public void imprimePostOrden() {
         imprimePostOrden(raiz);
         System.out.println();
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
